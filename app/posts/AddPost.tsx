@@ -1,12 +1,11 @@
 "use client";
 import {
   Button,
-  Loading,
+  Spinner,
   Popover,
-  Row,
   Spacer,
-  Text,
   Textarea,
+  PopoverTrigger,
 } from "@nextui-org/react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -102,24 +101,28 @@ export default function AddPost(): JSX.Element {
         placeholder={session ? "Enter your amazing ideas..." : ""}
         value={content}
         maxLength={300}
-        onChange={(e) => setContent(e.target.value)}
+        // onChange={(e) => setContent(e.target.value)}
       />
       <Spacer y={0.5} />
-      <Row wrap="wrap" align="center">
+      {/* <Row wrap="wrap" align="center"> */}
         <Popover isOpen={error} onOpenChange={setError} placement="right">
-          <Popover.Trigger>
+          <PopoverTrigger>
             <Button
               type="submit"
               disabled={!session || enhancing}
-              auto
+              // auto
               style={{ minWidth: "100px" }}
             >
-              {loading ? <Loading color="currentColor" size="sm" /> : "Post"}
+              {loading ? (
+                <Spinner // color="currentColor"
+                  size="sm"
+                />
+              ) : (
+                "Post"
+              )}
             </Button>
-          </Popover.Trigger>
-          <Popover.Content>
-            <Text css={{ p: "$10" }}>{errorMessage}</Text>
-          </Popover.Content>
+          </PopoverTrigger>
+          <p className="p-10">{errorMessage}</p>
         </Popover>
 
         <Popover
@@ -127,33 +130,33 @@ export default function AddPost(): JSX.Element {
           onOpenChange={enhanceError ? setEnhanceError : undefined}
           placement="right"
         >
-          <Popover.Trigger>
+          <PopoverTrigger>
             <Button
-              color="gradient"
+              // color="gradient"
               disabled={!session}
               style={{ marginLeft: 10, minWidth: "150px" }}
               onPress={enhanceWithAI}
-              auto
-              shadow
+              // auto
+              // shadow
             >
               {enhancing ? (
-                <Loading type="points-opacity" color="currentColor" size="sm" />
+                <Spinner
+                  // type="points-opacity"
+                  // color="currentColor"
+                  size="sm"
+                />
               ) : (
                 "Enhance with AI 😎"
               )}
             </Button>
-          </Popover.Trigger>
-          <Popover.Content>
-            <Text css={{ p: "$10" }}>
-              Error enhancing post. Please try again.
-            </Text>
-          </Popover.Content>
+          </PopoverTrigger>
+          <p className="p-10">Error enhancing post. Please try again.</p>
         </Popover>
 
-        <Text style={{ marginLeft: "auto" }}>
+        <p className="ml-auto">
           {(content && content.length) || "0"}/300
-        </Text>
-      </Row>
+        </p>
+      {/* </Row> */}
 
       <Spacer y={2} />
     </form>

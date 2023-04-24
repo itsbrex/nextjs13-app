@@ -1,10 +1,11 @@
 "use client";
-import { Button, Card, Col, Container, Row, Spacer, Text } from "@nextui-org/react";
+import { Button, Card, Spacer } from "@nextui-org/react";
 
 export default function Subscribe() {
   return (
     <main>
-      <Container>
+      <p>Subscribe page</p>
+      {/* <Container>
         <Text
           h1
           size={60}
@@ -91,7 +92,7 @@ export default function Subscribe() {
             </Row>
           </Card.Footer>
         </Card>
-      </Container>
+      </Container> */}
     </main>
   );
 }

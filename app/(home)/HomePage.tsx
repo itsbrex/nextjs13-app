@@ -2,19 +2,15 @@
 import {
   Button,
   Card,
-  Container,
-  Grid,
-  Row,
   Spacer,
-  Text,
   User,
-  useTheme,
+  Link as NextUILink,
 } from "@nextui-org/react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 export default function HomePage({ numStars }: { numStars: string }) {
-  const { isDark } = useTheme();
+  const isDark = true; // useTheme();
   const { data: session } = useSession();
   const { user } = session || {};
 
@@ -145,84 +141,87 @@ export default function HomePage({ numStars }: { numStars: string }) {
   ];
 
   return (
-    <Container>
+    <div className="container mx-auto">
       <Spacer />
-      <Container gap={0}>
-        <Text
-          h1
-          size={60}
-          css={{
-            lineHeight: "1.1",
-            textGradient: "45deg, $blue600 -20%, $pink600 50%",
-          }}
-          weight="bold"
+      <div className="gap-0">
+        <p
+        // h1
+        // size={60}
+        // css={{
+        //   lineHeight: "1.1",
+        //   textGradient: "45deg, $blue600 -20%, $pink600 50%",
+        // }}
+        // weight="bold"
         >
           Welcome{user && ", " + user.name}!
-        </Text>
-        <Text
-          h1
-          size={40}
-          css={{
-            lineHeight: "1.2",
-          }}
-          weight="medium"
+        </p>
+        <p
+        // h1
+        // size={40}
+        // css={{
+        //   lineHeight: "1.2",
+        // }}
+        // weight="medium"
         >
           This is an app built to showcase the capabilities of Next.js 13.
-        </Text>
+        </p>
         <Spacer y={1} />
-        <Row wrap="wrap" style={{marginBottom: 12}}>
-          <Button
-            color="gradient"
-            shadow
-            ghost
-            style={{ marginBottom: 4 }}
-            onPress={() =>
-              window.open("https://github.com/yaseenmustapha/nextjs13-app")
-            }
+        {/* <Row wrap="wrap" style={{marginBottom: 12}}> */}
+        <Button
+          // color="gradient"
+          // shadow
+          // ghost
+          style={{ marginBottom: 4 }}
+          onPress={() =>
+            window.open("https://github.com/yaseenmustapha/nextjs13-app")
+          }
+        >
+          Source Code on GitHub
+        </Button>
+
+        <Link href="https://github.com/yaseenmustapha/nextjs13-app">
+          <p
+          // h1
+          // size={20}
+          // css={{
+          //   lineHeight: "1.1",
+          //   textGradient: "45deg, $yellow600 10%, $pink600",
+          //   marginTop: 8,
+          //   paddingRight: 2,
+          //   paddingLeft: 12,
+          // }}
+          // weight="medium"
           >
-            Source Code on GitHub
-          </Button>
+            {numStars} stars on GitHub
+          </p>
+        </Link>
 
-          <Link href="https://github.com/yaseenmustapha/nextjs13-app">
-            <Text
-              h1
-              size={20}
-              css={{
-                lineHeight: "1.1",
-                textGradient: "45deg, $yellow600 10%, $pink600",
-                marginTop: 8,
-                paddingRight: 2,
-                paddingLeft: 12,
-              }}
-              weight="medium"
-            >
-              {numStars} stars on GitHub
-            </Text>
-          </Link>
-
-          
-        </Row>
+        {/* </Row> */}
 
         <User
-            src="https://avatars.githubusercontent.com/u/26501999"
-            name="Yaseen Mustapha"
-            pointer
-            zoomed
-            onClick={() => window.open("https://github.com/yaseenmustapha")}
-          >
-            <User.Link href="https://github.com/yaseenmustapha">
+          avatarProps={{
+            src: "https://avatars.githubusercontent.com/u/26501999",
+          }}
+          name="Yaseen Mustapha"
+          description={
+            <NextUILink href="https://github.com/yaseenmustapha" size="xs">
               github.com/yaseenmustapha
-            </User.Link>
-          </User>
+            </NextUILink>
+          }
+          // pointer
+          // zoomed
+          onClick={() => window.open("https://github.com/yaseenmustapha")}
+        />
 
         <Spacer y={2} />
 
-        <Text h1 size={40} weight="medium" b style={{ paddingLeft: 12 }}>
+        <p // h1 size={40} weight="medium" b style={{ paddingLeft: 12 }}
+        >
           Features
-        </Text>
-      </Container>
+        </p>
+      </div>
 
-      <Grid.Container gap={2} justify="center">
+      {/* <Grid.Container gap={2} justify="center">
         {cardItems.map((item, i) => (
           <Grid sm={4} key={i} style={{ width: "100%" }}>
             <Card css={{ paddingLeft: 6, paddingTop: 6, paddingBottom: 6 }}>
@@ -242,7 +241,7 @@ export default function HomePage({ numStars }: { numStars: string }) {
             </Card>
           </Grid>
         ))}
-      </Grid.Container>
-    </Container>
+      </Grid.Container> */}
+    </div>
   );
 }
